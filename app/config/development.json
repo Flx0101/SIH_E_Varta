@@ -1,7 +1,9 @@
 {
     "host": "http://localhost:3000",
     "dbURI": "mongodb+srv://chatAppUser:chatAppPassword@cluster0.sav78.mongodb.net/ChatApp?retryWrites=true&w=majority",
+    "dbName" : "ChatApp",
     "sessionSecret": "memer",
+    "secret" : "easy",
     "fb": {
         "clientID": "<facebook app ID key>",
         "clientSecret": "<facebook app secret key>",
