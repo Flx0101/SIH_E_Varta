@@ -4,10 +4,13 @@ const app = express();
 const chatConf = require('./app');
 const passport = require('passport');
 const port = process.env.PORT || 3000;
-const videoRouter = require('./app/video');
+
 var path = require('path');
+let favicon = require('serve-favicon');
 
 const bodyParser = require('body-parser');
+app.use(favicon('./app/favicon.ico'));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Set 'views' directory for any views 
@@ -26,7 +29,6 @@ app.use(bodyParser.json());
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
-app.use('/videoConf', videoRouter);
 app.use(chatConf.session);
 app.use(passport.initialize());
 app.use(passport.session());
@@ -39,6 +41,7 @@ app.use(require('morgan')('combined', {
     }
 }));
 app.use('/', chatConf.router);
+
 
 chatConf.ioServer(app).listen(port, () => {
     console.log('Server Running on Port: ', port);

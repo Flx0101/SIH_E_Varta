@@ -12,6 +12,7 @@ let ioServer = app => {
     app.locals.chatrooms = [];
     const server = require('http').Server(app);
     const io = require('socket.io')(server);
+    let stream = require('./ws/stream');
     io.set('transports', ['websocket']);
     let pubClient = redis(config.redis.port, config.redis.host, {
         auth_pass: config.redis.password
@@ -27,6 +28,8 @@ let ioServer = app => {
     io.use((socket, next) => {
         require('./session')(socket.request, {}, next);
     });
+    io.of('/stream').on('connection', stream);
+
     require('./socket')(io, app);
     return server;
 }
