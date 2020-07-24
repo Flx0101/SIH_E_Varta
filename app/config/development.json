@@ -1,24 +1,7 @@
 {
     "host": "http://localhost:3000",
     "dbURI": "mongodb+srv://chatAppUser:chatAppPassword@cluster0.sav78.mongodb.net/ChatApp?retryWrites=true&w=majority",
-    "dbName" : "ChatApp",
+    "dbName": "ChatApp",
     "sessionSecret": "memer",
-    "secret" : "easy",
-    "fb": {
-        "clientID": "<facebook app ID key>",
-        "clientSecret": "<facebook app secret key>",
-        "callbackURL": "//localhost:3000/auth/facebook/callback",
-        "profileFields": ["id", "displayName", "photos"]
-    },
-    "twitter": {
-        "consumerKey": "<twitter consumer key>",
-        "consumerSecret": "<twitter consumer secret key>",
-        "callbackURL": "//localhost:3000/auth/twitter/callback",
-        "profileFields": ["id", "displayName", "photos"]
-    },
-    "redis": {
-        "host": "127.0.0.1",
-        "port": 6379,
-        "password": ""
-    }
+    "secret": "easy"
 }

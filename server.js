@@ -2,7 +2,6 @@
 const express = require('express');
 const app = express();
 const chatConf = require('./app');
-const passport = require('passport');
 const port = process.env.PORT || 3000;
 
 var path = require('path');
@@ -30,8 +29,6 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.use(chatConf.session);
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use(require('morgan')('combined', {
     stream: {

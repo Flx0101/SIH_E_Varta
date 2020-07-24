@@ -16,9 +16,8 @@ window.addEventListener('load', () => {
         }
 
         var pc = [];
-
         let socket = io('/stream');
-
+        console.log(socket);
         var socketId = '';
         var myStream = '';
         var screen = '';
@@ -31,6 +30,8 @@ window.addEventListener('load', () => {
 
         socket.on('connect', () => {
             //set socketId
+            console.log("Trying as fuck to listen you bitchy server~~~~~~~~```");
+
             socketId = socket.io.engine.id;
 
 
