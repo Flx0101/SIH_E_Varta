@@ -1,7 +1,12 @@
+/**
+ * @author Amir Sanni <amirsanni@gmail.com>
+ * @date 6th January, 2020
+ */
 import h from './helpers.js';
 
 window.addEventListener('load', () => {
     const room = h.getQString(location.href, 'room');
+    console.log(room);
     const username = sessionStorage.getItem('username');
 
     if (!room) {
@@ -16,9 +21,9 @@ window.addEventListener('load', () => {
         }
 
         var pc = [];
+        console.log("Fuck you again!!!");
         let socket = io('/stream');
-        console.log(socket);
-        // socket = io();
+
         var socketId = '';
         var myStream = '';
         var screen = '';
@@ -31,8 +36,7 @@ window.addEventListener('load', () => {
 
         socket.on('connect', () => {
             //set socketId
-            console.log("Trying as fuck to listen you bitchy server~~~~~~~~```");
-
+            console.log("Asshole");
             socketId = socket.io.engine.id;
 
 

@@ -12,6 +12,7 @@ let ioServer = app => {
         require('./session')(socket.request, {}, next);
     });
     require('./socket')(io, app);
+    console.log(io);
     return server;
 }
 

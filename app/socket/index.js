@@ -1,9 +1,9 @@
 'use strict';
-const h = require('../helpers');
+// const h = require('../helpers');
 
 module.exports = (io, app) => {
 
-    io.of('/stream').on('connection', (socket) => {
+    io.of('/stream').on('connection', socket => {
 
         console.log("So here we go finally called by someone ~~~~~~~~");
         socket.on('subscribe', (data) => {
