@@ -7,12 +7,12 @@ const config = require('./config');
 let ioServer = app => {
     const server = require('http').Server(app);
     const io = require('socket.io')(server);
-    io.set('transports', ['websocket']);
+    const stream = require('./socket');
+    const path = require('path');
     io.use((socket, next) => {
         require('./session')(socket.request, {}, next);
     });
-    require('./socket')(io, app);
-    console.log(io);
+    io.of('/stream').on('connection', stream);
     return server;
 }
 
