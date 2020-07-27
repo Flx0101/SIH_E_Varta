@@ -3,5 +3,8 @@
     "dbURI": "mongodb+srv://chatAppUser:chatAppPassword@cluster0.sav78.mongodb.net/ChatApp?retryWrites=true&w=majority",
     "dbName": "ChatApp",
     "sessionSecret": "memer",
-    "secret": "easy"
+    "secret": "easy",
+    "lawyerColl" : "lawyers",
+    "policeColl" : "police",
+    "judgeColl" : "judges"
 }

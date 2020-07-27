@@ -30,20 +30,34 @@ module.exports = () => {
 
         'post': {
             '/register': (req, res, next) => {
+                console.log(typeof(req.body.category));
+                var category = req.body.category;
                 var det = new Form({
                     _id: mongoose.Types.ObjectId(),
                     username: req.body.username,
                     email: req.body.email,
-                    password: sha256(req.body.psw),
+                    password: sha256(req.body.psw)
                 });
                 console.log("Updating");
-
+                if(category == "Lawyer"){
+                    console.log("Done");
+                    category = config.lawyerColl;
+                }
+                else if(category == "Police"){
+                    category = config.policeColl;
+                }
+                else if(category == "Judge"){
+                    category = config.judgeColl;
+                }
+                else{
+                    category = "users";
+                }
                 MongoClient.connect(config.dbURI, (err, client) => {
 
-                    client.db(config.dbName).collection("users").insertOne(det)
+                    client.db(config.dbName).collection(category).insertOne(det)
                         .then((det) => {
                             console.log("Saved");
-                            return res.redirect('/');
+                            return res.status(200).send({message : "Done"});
                         }).catch(err => console.log(err));
                 });
 
@@ -51,11 +65,125 @@ module.exports = () => {
             '/login': (req, res, next) => {
                 var det = new User({
                     'email': req.body.email,
-                    'password': sha256(req.body.psd)
+                    'password': sha256(req.body.psd),
                 });
                 MongoClient.connect(config.dbURI, (err, client) => {
 
                     client.db(config.dbName).collection("users").findOne({ 'email': det.email })
+                        .then((doc) => {
+                            console.log(doc.password);
+                            console.log(det.password);
+                            if (doc.password == det.password) {
+                                let token = jwt.sign({ email: det.email },
+                                    config.secret, { expiresIn: '24h' }
+                                );
+
+                                res.status(200).json({
+                                    success: true,
+                                    message: "Authenticated,GG",
+                                    token: token
+                                });
+                                //Call the page instead of JSON
+                                //return res.redirect('/dashboard/');
+                            } else {
+                                res.send(403).json({
+                                    success: false,
+                                    message: 'Incorrect username or password'
+                                });
+                                //return res.redirect('/asd');
+                            }
+
+
+                        }).catch((err) => {
+                            console.log(err);
+                        });
+                });
+
+            },
+            '/lawyerLogin': (req, res, next) => {
+                var det = new User({
+                    'email': req.body.email,
+                    'password': sha256(req.body.psd),
+                });
+                MongoClient.connect(config.dbURI, (err, client) => {
+
+                    client.db(config.dbName).collection(config.lawyerColl).findOne({ 'email': det.email })
+                        .then((doc) => {
+                            console.log(doc.password);
+                            console.log(det.password);
+                            if (doc.password == det.password) {
+                                let token = jwt.sign({ email: det.email },
+                                    config.secret, { expiresIn: '24h' }
+                                );
+
+                                res.json({
+                                    success: true,
+                                    message: "Authenticated,GG",
+                                    token: token
+                                });
+                                //Call the page instead of JSON
+                                //return res.redirect('/dashboard/');
+                            } else {
+                                res.send(403).json({
+                                    success: false,
+                                    message: 'Incorrect username or password'
+                                });
+                                //return res.redirect('/asd');
+                            }
+
+
+                        }).catch((err) => {
+                            console.log(err);
+                        });
+                });
+
+            },
+            '/policeColl': (req, res, next) => {
+                var det = new User({
+                    'email': req.body.email,
+                    'password': sha256(req.body.psd),
+                });
+                MongoClient.connect(config.dbURI, (err, client) => {
+
+                    client.db(config.dbName).collection(config.policeColl).findOne({ 'email': det.email })
+                        .then((doc) => {
+                            console.log(doc.password);
+                            console.log(det.password);
+                            if (doc.password == det.password) {
+                                let token = jwt.sign({ email: det.email },
+                                    config.secret, { expiresIn: '24h' }
+                                );
+
+                                res.json({
+                                    success: true,
+                                    message: "Authenticated,GG",
+                                    token: token
+                                });
+                                //Call the page instead of JSON
+                                //return res.redirect('/dashboard/');
+                            } else {
+                                res.send(403).json({
+                                    success: false,
+                                    message: 'Incorrect username or password'
+                                });
+                                //return res.redirect('/asd');
+                            }
+
+
+                        }).catch((err) => {
+                            console.log(err);
+                        });
+                });
+
+            },
+            '/judgeLogin': (req, res, next) => {
+                var det = new User({
+                    'email': req.body.email,
+                    'password': sha256(req.body.psd),
+                });
+                MongoClient.connect(config.dbURI, (err, client) => {
+
+                    client.db(config.dbName).collection(config.judgeColl).findOne({ 'email': det.email })
                         .then((doc) => {
                             console.log(doc.password);
                             console.log(det.password);
