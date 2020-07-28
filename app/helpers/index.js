@@ -34,8 +34,9 @@ let randomHex = () => {
 }
 
 // Find a chatroom with a given ID
-
+console.log(route);
 module.exports = {
+    router,
     route,
     randomHex
 }

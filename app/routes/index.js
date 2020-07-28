@@ -10,6 +10,10 @@ const { ReplSet } = require('mongodb');
 let jwt = require('jsonwebtoken');
 let middleware = require('./../middleware/token');
 const { render } = require('ejs');
+const routes = require('./../helpers').router;
+routes.get('/dashboard' , (req , res , next) => {
+    console.log("helo");
+});
 
 module.exports = () => {
     let routes = {
