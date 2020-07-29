@@ -23,6 +23,89 @@
 
 <body>
 
+    <div class="container-grid">
+        <div class="header">
+            <div class="room-comm"  id="fakenavbar" hidden>
+                <button class="btn btn-sm spacing" id='adduser' title="Add Participant">
+                    <i class="fas fa-user-plus fa-2x"></i>
+                </button>
+    
+                <button class="btn btn-sm spacing" id='participant' title="Participants">
+                    <i class="fas fa-users fa-2x"></i>
+                </button>
+                
+                <button class="btn btn-sm spacing" id='toggle-chat-pane'>
+                    <i class="far fa-comment-alt fa-2x"></i> <span class="badge badge-danger very-small font-weight-lighter" id='new-chat-notification' hidden>New</span>
+                </button>
+            </div>
+        </div>
+        <div class="content">
+            <video class="local-video mirror-mode" id='local' volume='0' autoplay muted></video>
+            <div class="col-md-12 main" id='main-section'>                    
+                <div class="row mt-2 mb-2" id='videos'></div>
+            </div>
+        </div>
+        <div class="chatting-section room-comm" hidden>
+            <div class="chat-col d-print-none mb-2" id='chat-pane' hidden>
+                <div class="top-right">
+                    <i class="fas fa-times-circle" id='closechat' title="Close Chat" aria-hidden="true"></i>
+                </div>
+                <ul class="nav nav-tabs justify-content-center" id="navigation-tabs">
+                    <li class="nav-item">
+                      <a class="nav-link" href="#"><i class="fas fa-user-plus fa-2x"></i></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#"> <i class="fas fa-users fa-2x"></i></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#"><i class="far fa-comment-alt fa-2x"></i></a>
+                    </li>
+                  </ul>
+                <div id='chat-messages'></div>
+                <div class="publisher bt-1 border-light"> 
+                    <input id='chat-input' name="" class="form-control type_msg publisher-input" type="text" placeholder="Write something"> 
+                    <span class="publisher-btn file-group"> 
+                        <i class="fa fa-paperclip file-browser"></i> 
+                        <input type="file"> 
+                    </span> 
+                    <a class="publisher-btn" href="#" data-abc="true">
+                        <i class="fa fa-smile"></i>
+                    </a> 
+                    <a class="publisher-btn text-info" href="#" data-abc="true">
+                        <i class="fa fa-paper-plane"></i>
+                    </a> 
+                </div>
+            </div>
+        </div>
+        <div class="footer room-comm" hidden>
+            <div class="btn-toolbar fixed-bottom justify-content" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group" role="group" aria-label="First group">
+                    <button type="button" class="btn btn-dark btn-rounded" id='toggle-video' title="Hide Video">
+                    <i class="fas fa-video fa-2x" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="btn btn-light btn-rounded" id='toggle-mute' title="Mute">
+                        <i class="fas fa-microphone-alt fa-2x" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="btn btn-light btn-rounded dropdown-toggle" data-toggle="dropdown" id='record' title="Record">
+                        <i class="fa fa-dot-circle fa-2x" aria-hidden="true"></i>
+                    </button>
+                        <!-- <div class="dropdown-menu" aria-labelledby="record">
+                            <button class="dropdown-item record-option" type="button" id='record-video'>Record video</button>
+                            <button class="dropdown-item record-option" type="button" id='record-screen'>Record Screen</button>
+                        </div>      -->
+                    <button type="button" class="btn btn-light btn-rounded" id='share-screen' title="Share screen">
+                        <i class="fas fa-desktop fa-2x" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger btn-rounded">
+                        <a href="/" class="text-white text-decoration-none">
+                            <i class="fas fa-phone-slash fa-2x" aria-hidden="true" title="Leave"></i>
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="custom-modal" id='recording-options-modal'>
         <div class="custom-modal-content">
             <div class="row text-center">
@@ -41,26 +124,9 @@
             </div>
         </div>
     </div>
-    
-    <div class="fixed-top">
-        <div class="pull-right room-comm" hidden>
-
-            <button class="btn btn-sm spacing" id='adduser' title="Add Participant">
-                <i class="fas fa-user-plus fa-2x"></i>
-            </button>
-
-            <button class="btn btn-sm spacing" id='participant' title="Participants">
-                <i class="fas fa-users fa-2x"></i>
-            </button>
-            
-            <button class="btn btn-sm spacing" id='toggle-chat-pane'>
-                <i class="far fa-comment-alt fa-2x"></i> <span class="badge badge-danger very-small font-weight-lighter" id='new-chat-notification' hidden>New</span>
-            </button>
-
-        </div>
-    </div>
-
-    <div class="container-fluid" id='room-create' hidden>
+   
+  
+    <div class="container-fluid fixed-top" id='room-create' hidden>
         <div class="row">
             <div class="col-12 h2 mt-5 text-center">Create Room</div>
         </div>
@@ -90,7 +156,7 @@
 
 
 
-    <div class="container-fluid" id='username-set' hidden>
+    <div class="container-fluid fixed-top" id='username-set' hidden>
         <div class="row">
             <div class="col-12 h4 mt-5 text-center">Your Name</div>
         </div>
@@ -111,14 +177,15 @@
         </div>
     </div>
 
-
+ <!-- 
     
     <div class="container-fluid room-comm" hidden>
         <div class="row">
             <video class="local-video mirror-mode" id='local' volume='0' autoplay muted></video>
         </div>
-        <div class="btn-toolbar fixed-bottom btn-toolbar-2" role="toolbar" aria-label="Toolbar with button groups">
-            <div class="btn-group btn-group-2" role="group" aria-label="First group">
+        
+        <div class="btn-toolbar fixed-bottom justify-content" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group" role="group" aria-label="First group">
                 <button type="button" class="btn btn-dark btn-rounded" id='toggle-video' title="Hide Video">
                   <i class="fas fa-video fa-2x" aria-hidden="true"></i>
                 </button>
@@ -129,10 +196,10 @@
                     <button type="button" class="btn btn-light btn-rounded dropdown-toggle" data-toggle="dropdown" id='record' title="Record">
                         <i class="fa fa-dot-circle fa-2x" aria-hidden="true"></i>
                     </button>
-                    <!-- <div class="dropdown-menu" aria-labelledby="record">
+                     <div class="dropdown-menu" aria-labelledby="record">
                         <button class="dropdown-item record-option" type="button" id='record-video'>Record video</button>
                         <button class="dropdown-item record-option" type="button" id='record-screen'>Record Screen</button>
-                      </div>     -->
+                      </div>     
                 </div>
                 <button type="button" class="btn btn-light btn-rounded" id='share-screen' title="Share screen">
                     <i class="fas fa-desktop fa-2x" aria-hidden="true"></i>
@@ -149,15 +216,10 @@
             <div class="col-md-12 main" id='main-section'>                    
                 <div class="row mt-2 mb-2" id='videos'></div>
             </div>
-           
-            <!-- <div class="col-md-3 chat-col d-print-none mb-2 bg-primary" id='chat-pane' hidden>
-                <div id='chat-messages'></div>
-
-                <div class="row">
-                    <textarea  class="form-control rounded-pill chat-box border-info" rows='3' placeholder="Type here..."></textarea>
-                </div>
-            </div> -->
             <div class="col-md-3 chat-col d-print-none mb-2" id='chat-pane' hidden>
+                <div class="top-right">
+                    <i class="fas fa-times-circle fa-2x" id='closechat' title="Close Chat" aria-hidden="true"></i>
+                </div>
                 <div id='chat-messages'></div>
                 <div class="input-group">
                     <div class="input-group-append">
@@ -168,10 +230,24 @@
                         <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
                     </div>
                 </div>
-                
+                 <div class="publisher bt-1 border-light"> 
+                    <img class="avatar avatar-xs" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="..."> 
+                    <input class="publisher-input" type="text" placeholder="Write something"> 
+                    <span class="publisher-btn file-group"> 
+                        <i class="fa fa-paperclip file-browser">
+                        </i> 
+                        <input type="file"> 
+                    </span> 
+                    <a class="publisher-btn" href="#" data-abc="true">
+                        <i class="fa fa-smile"></i>
+                    </a> 
+                    <a class="publisher-btn text-info" href="#" data-abc="true">
+                        <i class="fa fa-paper-plane"></i>
+                    </a> 
+                </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </body>
 
 </html>
