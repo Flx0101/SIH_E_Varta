@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
-const { ObjectID } = require('mongodb');
-const { Mongoose } = require('mongoose');
+const { ObjectId } = require('mongodb');
 
 const Meeting = mongoose.Schema({
-    _id : Mongoose.Schema.Types.ObjectID,
+    _id : mongoose.Schema.Types.ObjectId,
     caseID : {
-        type : ObjectID,
+        type : String,
         required : true
     },
     owner : {
