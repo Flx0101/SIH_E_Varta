@@ -6,5 +6,7 @@
     "secret": "easy",
     "lawyerColl" : "lawyers",
     "policeColl" : "police",
-    "judgeColl" : "judges"
+    "judgeColl" : "judges",
+    "casesColl" : "cases",
+    "meetingColl" : "meetings"
 }

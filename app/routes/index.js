@@ -11,16 +11,83 @@ let jwt = require('jsonwebtoken');
 let middleware = require('./../middleware/token');
 const { render } = require('ejs');
 const routes = require('./../helpers').router;
+const Case = require('./../models/case');
+const Meeting = require('./../models/meeting');
+
+
 routes.get('/dashboard' ,middleware.checkToken, (req , res , next) => {
     console.log("helo");
     //decoded value : req.decoded;
     let email = req.decoded.email;
 
-    
+    MongoClient.connect(config.dbURI , (err , client) => {
+        console.log(email);
+        client.db(config.dbName).collection(config.casesColl).find({
+            "members" : email
+        }).toArray()
+        .then((doc) => {
+            console.log(doc);
+            res.json(doc);
+        })
+        .catch((err) =>  {
+            console.log(err);
+            res.status(400).json({
+                "message" : "Fetching failed",
+                "description" : err
+            })
+        });
 
-    res.json({"message" : "GG" , 
-    "email" : req.decoded.email});
+    });
 });
+
+routes.post('/registerCase',(req , res , next) => {
+    var det = new Case({
+        description : req.body.desc,
+        date : req.body.date,
+        members : req.body.members
+    });
+    det.date = new Date(det.date);
+    console.log(det);
+    console.log(typeof(det.date));
+    MongoClient.connect(config.dbURI , (err , client) => {
+        client.db(config.dbName).collection(config.casesColl).insertOne(det)
+        .then((det) => {
+            console.log(det);
+            res.status(200).json({
+                "msg" : "Successfully registered",
+            })
+        })
+        .catch((err) => console.log(err));
+    });
+
+});
+
+routes.post("/registerMeeting" ,middleware.checkToken ,(req , res , next) => {
+    var det = {
+        _id: mongoose.Types.ObjectId(),
+        caseID : req.body.caseID,
+        owner : req.decoded,
+        meetingID : req.body.meetingID,
+        meetingURL : req.body.meetingURL
+    }
+    //Saving the meetings based on CaseID
+
+    MongoClient.connect(config.dbURI , (err , client) => {
+        client.db(config.dbName).collection(meetingColl).insertOne(det)
+        .then((det) => {
+            console.log(det._doc);
+            res.status(200).json("Meeting Registered");
+        })
+        .catch((err) => {
+            res.status(400).json({
+                "message" : "Error occured",
+                "Detail" : err
+            });
+        })
+    });
+});
+
+
 
 module.exports = () => {
     let routes = {
@@ -88,7 +155,7 @@ module.exports = () => {
                                 let token = jwt.sign({ email: det.email },
                                     config.secret, { expiresIn: '24h' }
                                 );
-
+                                
                                 res.status(200).json({
                                     success: true,
                                     message: "Authenticated,GG",
