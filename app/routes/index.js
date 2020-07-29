@@ -11,8 +11,15 @@ let jwt = require('jsonwebtoken');
 let middleware = require('./../middleware/token');
 const { render } = require('ejs');
 const routes = require('./../helpers').router;
-routes.get('/dashboard' , (req , res , next) => {
+routes.get('/dashboard' ,middleware.checkToken, (req , res , next) => {
     console.log("helo");
+    //decoded value : req.decoded;
+    let email = req.decoded.email;
+
+    
+
+    res.json({"message" : "GG" , 
+    "email" : req.decoded.email});
 });
 
 module.exports = () => {
@@ -20,7 +27,7 @@ module.exports = () => {
         'get': {
             '/': (req, res, next) => {
                 res.render('login');
-            },
+            }, 
             '/video': (req, res, next) => {
                 console.log("reached to video page");
                 res.render('video');
