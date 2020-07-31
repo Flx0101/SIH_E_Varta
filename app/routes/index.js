@@ -25,17 +25,17 @@ routes.get('/dashboard' ,middleware.checkToken, (req , res , next) => {
         client.db(config.dbName).collection(config.casesColl).find({
             "members" : email
         }).toArray()
-        .then((doc) => {
-            console.log(doc);
-            res.json(doc);
-        })
-        .catch((err) =>  {
-            console.log(err);
-            res.status(400).json({
-                "message" : "Fetching failed",
-                "description" : err
+            .then((doc) => {
+                console.log(doc);
+                res.json(doc);
             })
-        });
+            .catch((err) =>  {
+                console.log(err);
+                res.status(400).json({
+                    "message" : "Fetching failed",
+                    "description" : err
+                })
+            });
 
     });
 });
@@ -51,13 +51,13 @@ routes.post('/registerCase',(req , res , next) => {
     console.log(typeof(det.date));
     MongoClient.connect(config.dbURI , (err , client) => {
         client.db(config.dbName).collection(config.casesColl).insertOne(det)
-        .then((det) => {
-            console.log(det);
-            res.status(200).json({
-                "msg" : "Successfully registered",
+            .then((det) => {
+                console.log(det);
+                res.status(200).json({
+                    "msg" : "Successfully registered",
+                })
             })
-        })
-        .catch((err) => console.log(err));
+            .catch((err) => console.log(err));
     });
 
 });
@@ -74,16 +74,16 @@ routes.post("/registerMeeting" ,middleware.checkToken ,(req , res , next) => {
 
     MongoClient.connect(config.dbURI , (err , client) => {
         client.db(config.dbName).collection(meetingColl).insertOne(det)
-        .then((det) => {
-            console.log(det._doc);
-            res.status(200).json("Meeting Registered");
-        })
-        .catch((err) => {
-            res.status(400).json({
-                "message" : "Error occured",
-                "Detail" : err
-            });
-        })
+            .then((det) => {
+                console.log(det._doc);
+                res.status(200).json("Meeting Registered");
+            })
+            .catch((err) => {
+                res.status(400).json({
+                    "message" : "Error occured",
+                    "Detail" : err
+                });
+            })
     });
 });
 
@@ -94,7 +94,7 @@ module.exports = () => {
         'get': {
             '/': (req, res, next) => {
                 res.render('login');
-            }, 
+            },
             '/video': (req, res, next) => {
                 console.log("reached to video page");
                 res.render('video');
@@ -155,7 +155,7 @@ module.exports = () => {
                                 let token = jwt.sign({ email: det.email },
                                     config.secret, { expiresIn: '24h' }
                                 );
-                                
+
                                 res.status(200).json({
                                     success: true,
                                     message: "Authenticated,GG",
@@ -173,8 +173,8 @@ module.exports = () => {
 
 
                         }).catch((err) => {
-                            console.log(err);
-                        });
+                        console.log(err);
+                    });
                 });
 
             },
@@ -211,8 +211,8 @@ module.exports = () => {
 
 
                         }).catch((err) => {
-                            console.log(err);
-                        });
+                        console.log(err);
+                    });
                 });
 
             },
@@ -249,8 +249,8 @@ module.exports = () => {
 
 
                         }).catch((err) => {
-                            console.log(err);
-                        });
+                        console.log(err);
+                    });
                 });
 
             },
@@ -287,8 +287,8 @@ module.exports = () => {
 
 
                         }).catch((err) => {
-                            console.log(err);
-                        });
+                        console.log(err);
+                    });
                 });
 
             }
