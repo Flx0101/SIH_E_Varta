@@ -1,63 +1,357 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:wght@200;300;400;500;600;700;800;900');
 
-    body {
-		font-family: Arial, Helvetica, sans-serif;
-		background-color: black;
-	  }
-	  
-	  * {
-		box-sizing: border-box;
-	  }
-	  
-	  /* Add padding to containers */
-	  .container {
-		padding: 16px;
-		background-color: white;
-	  }
-	  
-	  /* Full-width input fields */
-	  input[type=text], input[type=password] {
-		width: 100%;
-		padding: 15px;
-		margin: 5px 0 22px 0;
-		display: inline-block;
-		border: none;
-		background: #f1f1f1;
-	  }
-	  
-	  input[type=text]:focus, input[type=password]:focus {
-		background-color: #ddd;
-		outline: none;
-	  }
-	  
-	  /* Overwrite default styles of hr */
-	  hr {
-		border: 1px solid #f1f1f1;
-		margin-bottom: 25px;
-	  }
-	  
-	  /* Set a style for the submit button */
-	  .registerbtn {
-		background-color: #4CAF50;
-		color: white;
-		padding: 16px 20px;
-		margin: 8px 0;
-		border: none;
-		cursor: pointer;
-		width: 100%;
-		opacity: 0.9;
-	  }
-	  
-	  .registerbtn:hover {
-		opacity: 1;
-	  }
-	  
-	  /* Add a blue text color to links */
-	  a {
-		color: dodgerblue;
-	  }
-	  
-	  /* Set a grey background color and center the text of the "sign in" section */
-	  .signin {
-		background-color: #f1f1f1;
-		text-align: center;
-	  }
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
+
+section{
+	position: relative;
+	min-height: 100vh;
+	background: #f1f1ef;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+}
+
+section .login-container{
+	position: relative;
+	width: 75%;
+	margin: auto;
+	height: 500px;
+	background: #fff;
+	box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+	overflow: hidden;
+}
+
+section .login-container .user{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+}
+
+section .login-container .user .imgBx{
+	position: relative;
+	width: 50%;
+	height: 100%;
+	background: #ff0;
+	transition: 0.5s;
+}
+
+section .login-container .user .imgBx img{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+section .login-container .user .formBx{
+	position: relative;
+	width: 50%;
+	height: 100%;
+	background: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 40px;
+	transition: 0.5s;
+}
+
+section .login-container .user .formBx form h2{
+	font-size: 18px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	text-align:center;
+	width: 100%;
+	margin-bottom: 10px;
+	color: #555;
+}
+
+section .login-container .user .formBx form input{
+	position: relative;
+	width: 100%;
+	padding:10px;
+	background: #f5f5f5;
+	color: #333;
+	border: none;
+	outline: none;
+	box-shadow: none;
+	margin: 8px 0;
+	font-size: 14px;
+	letter-spacing: 1px;
+	font-weight: 300;
+}
+
+section .login-container .user .formBx form input[type="submit"]{
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	background: #F9AA33;
+	color: #fff;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 500;
+	letter-spacing: 1px;
+	transition: 0.5s;
+}
+
+section .login-container .user .formBx form .signup{
+	position: relative;
+	margin-top: 20px;
+	font-size: 12px;
+	letter-spacing: 1px;
+	color: #555;
+	text-transform: uppercase;
+	font-weight: 300;
+}
+
+section .login-container .user .formBx form .signup a{
+	font-weight: 600;
+	text-decoration: none;
+	color:#677eff;
+}
+
+section .login-container .signupBx{
+	pointer-events: none;
+}
+
+section .login-container.active .signupBx{
+	pointer-events: initial;
+}
+
+section .login-container .signupBx .formBx{
+	left: 100%;
+}
+
+section .login-container.active .signupBx .formBx{
+	left: 0;
+}
+
+section .login-container .signupBx .imgBx{
+	left: -100%;
+}
+
+section .login-container.active .signupBx .imgBx{
+	left: 0;
+}
+
+
+section .login-container .signinBx .formBx{
+	left: 0;
+}
+
+section .login-container.active .signinBx .formBx{
+	left: 100%;
+}
+
+section .login-container .signinBx .imgBx{
+	left: 0;
+}
+
+section .login-container.active .signinBx .imgBx{
+	left: -100%;
+}
+
+@media screen and (max-width:700px){
+	section .login-container{
+		width: 400px;
+	}
+
+	section .login-container .imgBx{
+		display:none ;
+	}
+	section .login-container .user .formBx{
+		width:100%;
+	}
+}
+
+button{
+	background: #F9AA33 !important;
+	border: none !important;
+	color: black!important;
+	font-weight: bolder!important;
+}
+
+button:focus{
+	outline: none;
+}
+
+button:hover{
+	cursor: pointer;
+	opacity: 0.8;
+}
+
+input[type=email], [type=password], [type=text]{
+	outline: none;
+}
+
+.text-danger{
+	font-weight: 500;
+}
+
+.text-danger:hover{
+	font-weight: bolder;
+	cursor: pointer;
+}
+
+/* Font Awesome */
+.fa {
+	padding-top: 1em;
+	position: relative;
+	display: table-cell;
+	width: 60px;
+	height: 36px;
+	text-align: center;
+	vertical-align: middle;
+	font-size:20px;
+}
+
+/* Side Bar */
+.main-menu:hover,nav.main-menu.expanded {
+	width:250px;
+	overflow:visible;
+}
+
+.main-menu {
+	background:#344955;
+	position:fixed;
+	top:0;
+	bottom:0;
+	height:100%;
+	left:0;
+	width:60px;
+	overflow: hidden;
+	-webkit-transition:width .05s linear;
+	transition:width .05s linear;
+	z-index:1000;
+}
+
+.main-menu>ul {
+	margin:7px 0;
+}
+
+.main-menu li {
+	position:relative;
+	display:block;
+	float: left;
+	width:250px;
+}
+
+.main-menu li>a {
+	position:relative;
+	margin-top: 2em;
+	display:table;
+	border-collapse:collapse;
+	border-spacing:0;
+	color:rgb(255, 255, 255);
+	font-family:'Nunito',sans-serif;
+	font-size: 18px;
+	text-decoration:none;
+	-webkit-transition:all .1s linear;
+	transition:all .1s linear;
+
+}
+
+.main-menu .nav-icon {
+	position:relative;
+	display:table-cell;
+	width:60px;
+	height:36px;
+	text-align:center;
+	vertical-align:middle;
+	font-size:18px;
+}
+
+.main-menu .nav-text {
+	padding-top: 1.5em;
+	font-weight: bold;
+	position:relative;
+	display:table-cell;
+	vertical-align:middle;
+	width:190px;
+	font-family: 'Titillium Web', sans-serif;
+}
+
+.main-menu>ul.logout {
+	position:absolute;
+	left:0;
+	bottom:0;
+	margin-bottom: 2em;
+}
+
+.no-touch .scrollable.hover {
+	overflow-y:hidden;
+}
+
+.no-touch .scrollable.hover:hover {
+	overflow-y:auto;
+	overflow:visible;
+}
+
+a:hover,a:focus {
+	text-decoration:none;
+}
+
+nav {
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	-o-user-select:none;
+	user-select:none;
+}
+
+nav ul,nav li {
+	outline:0;
+	margin:0;
+	padding:0;
+}
+.main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
+	color:rgb(7, 7, 7);
+}
+
+/* Card List */
+.card-list{
+	display:block;
+	height:100%;
+	margin-left:60px;
+	padding:30px;
+	flex-grow: 1;
+}
+
+.area {
+	float: left;
+	background: #e2e2e2;
+	width: 100%;
+	height: 100%;
+}
+
+@font-face {
+	font-family: 'Titillium Web';
+	font-style: normal;
+	font-weight: 300;
+	src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
+}
+
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: white;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 20px;       /* roundness of the scroll thumb */
+	border: 8px solid #0275d8;
+}

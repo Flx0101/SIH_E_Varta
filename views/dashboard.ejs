@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>chatConf - Login</title>
+    <link rel="stylesheet" href="/css/loginStyles.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <script src="/js/jquery-2.1.4.min.js"></script>
+
+</head>
+
+<body>
+<h3 id="main-heading" className="d-flex justify-content-center">
+    Schedule Meeting
+</h3>
+<div className="container">
+    <div className="row">
+        <div className="col-md-12">
+            <div className="bg-radius" id="main-div">
+                <div className="d-flex justify-content-left mt-4 mx-4">
+                    <input id="meetingTitle" className="text-muted form-control" type="text"
+                           placeholder="Meeting Title"/>
+                </div>
+                <div className="d-flex justify-content-left mt-4 mx-4">
+                            <textarea className="text-muted form-control" rows="5" id="meetingDesc"
+                                      placeholder="Description">
+                            </textarea>
+                </div>
+                <hr/>
+                <div onChange={selectMeetingPurpose} className="ml-5">
+                    <label id="generalMeeting" htmlFor="general-meeting"
+                           className="px-2">
+                        <input type="radio" id="general-meeting" value="General Meeting"
+                               name="Meeting"/>
+                        General Meeting
+                    </label>
+                    <label id="caseHearing" htmlFor="case-hearing"
+                           className="px-2">
+                        <input type="radio" id="case-hearing" value="Case Hearing"
+                               name="Meeting"/>
+                        Case Hearing
+                    </label>
+                    <label id="policeConference" htmlFor="police-conference"
+                           className="px-2">
+                        <input type="radio" id="police-conference" value="Police Conference"
+                               name="Meeting"/>
+                        Police Conference
+                    </label>
+                </div>
+                <hr/>
+                <div onChange={selectMeetingType} className="ml-5">
+                    <label id="publicMeeting" htmlFor="public-meeting"
+                           className="px-2">
+                        <input type="radio" id="public-meeting" value="Public Meeting"
+                               name="MeetingType"/>
+                        Public Meeting
+                    </label>
+                    <label id="privateMeeting" htmlFor="private-meeting"
+                           className="px-2">
+                        <input type="radio" id="private-meeting" value="Private Meeting"
+                               name="MeetingType"/>
+                        Private Meeting
+                    </label>
+                </div>
+                <div className="d-flex justify-content-left my-3 mx-4">
+                    <Button id="btnInvite" onClick={()=>setModalShow(true)}
+                        className="btnform-control">
+                        Invite People</Button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div className="participants">
+        <div id="participants"></div>
+    </div>
+    <div className="footerButtons mt-3">
+        <Button id="btnScheduleMeeting"
+                className="btn btn-meeting">
+            Schedule Meeting
+        </Button>
+
+        <button type="button" id="btnHostMeeting" onClick={createMeeting}
+                className="btn btn-meeting">
+            Host Meeting
+        </button>
+    </div>

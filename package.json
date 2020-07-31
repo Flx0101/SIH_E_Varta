@@ -31,5 +31,8 @@
         "socket.io": "1.4.4",
         "socket.io-redis": "1.0.0",
         "winston": "2.1.1"
+    },
+    "devDependencies": {
+        "axios": "^0.19.2"
     }
 }

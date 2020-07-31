@@ -6,6 +6,7 @@ html, body {
 body::-webkit-scrollbar {
     width: 0px;  
 }
+
 .container-grid {
     height: 100%;
     display: grid;
