@@ -15,31 +15,6 @@ const Case = require('./../models/case');
 const Meeting = require('./../models/meeting');
 
 
-routes.get('/dashboard' ,middleware.checkToken, (req , res , next) => {
-    console.log("helo");
-    //decoded value : req.decoded;
-    let email = req.decoded.email;
-
-    MongoClient.connect(config.dbURI , (err , client) => {
-        console.log(email);
-        client.db(config.dbName).collection(config.casesColl).find({
-            "members" : email
-        }).toArray()
-            .then((doc) => {
-                console.log(doc);
-                res.json(doc);
-            })
-            .catch((err) =>  {
-                console.log(err);
-                res.status(400).json({
-                    "message" : "Fetching failed",
-                    "description" : err
-                })
-            });
-
-    });
-});
-
 routes.post('/registerCase',(req , res , next) => {
     var det = new Case({
         description : req.body.desc,
@@ -301,3 +276,7 @@ module.exports = () => {
 
     return h.route(routes);
 }
+
+routes.get('/dashboard', function (req, res) {
+    res.send('helo');
+})
