@@ -14,17 +14,16 @@ const routes = require('./../helpers').router;
 const Case = require('./../models/case');
 const Meeting = require('./../models/meeting');
 
-
-routes.get('/dashboard' , (req , res , next) => {
+routes.get('/dashboard', middleware.checkToken, (req, res, next) => {
     console.log("helo");
     //decoded value : req.decoded;
     let email = req.decoded.email;
 
-    MongoClient.connect(config.dbURI , (err , client) => {
+    MongoClient.connect(config.dbURI, (err, client) => {
         console.log(email);
         client.db(config.dbName).collection(config.casesColl).find({
             "members" : email
-        }).toArray()
+            }).toArray()
             .then((doc) => {
                 console.log(doc);
                 res.json(doc);
@@ -36,21 +35,20 @@ routes.get('/dashboard' , (req , res , next) => {
                     "description" : err
                 })
             });
-
     });
     res.render('dashboard');
 });
 
-routes.post('/registerCase',(req , res , next) => {
+routes.post('/registerCase', (req, res, next) => {
     var det = new Case({
-        description : req.body.desc,
-        date : req.body.date,
-        members : req.body.members
+        description: req.body.desc,
+        date: req.body.date,
+        members: req.body.members
     });
     det.date = new Date(det.date);
     console.log(det);
     console.log(typeof(det.date));
-    MongoClient.connect(config.dbURI , (err , client) => {
+    MongoClient.connect(config.dbURI, (err, client) => {
         client.db(config.dbName).collection(config.casesColl).insertOne(det)
             .then((det) => {
                 console.log(det);
@@ -63,17 +61,17 @@ routes.post('/registerCase',(req , res , next) => {
 
 });
 
-routes.post("/registerMeeting" ,middleware.checkToken ,(req , res , next) => {
+routes.post("/registerMeeting", middleware.checkToken, (req, res, next) => {
     var det = {
-        _id: mongoose.Types.ObjectId(),
-        caseID : req.body.caseID,
-        owner : req.decoded,
-        meetingID : req.body.meetingID,
-        meetingURL : req.body.meetingURL
-    }
-    //Saving the meetings based on CaseID
+            _id: mongoose.Types.ObjectId(),
+            caseID: req.body.caseID,
+            owner: req.decoded,
+            meetingID: req.body.meetingID,
+            meetingURL: req.body.meetingURL
+        }
+        //Saving the meetings based on CaseID
 
-    MongoClient.connect(config.dbURI , (err , client) => {
+    MongoClient.connect(config.dbURI, (err, client) => {
         client.db(config.dbName).collection(meetingColl).insertOne(det)
             .then((det) => {
                 console.log(det._doc);
@@ -87,8 +85,6 @@ routes.post("/registerMeeting" ,middleware.checkToken ,(req , res , next) => {
             })
     });
 });
-
-
 
 module.exports = () => {
     let routes = {
@@ -118,17 +114,14 @@ module.exports = () => {
                     password: sha256(req.body.psw)
                 });
                 console.log("Updating");
-                if(category == "Lawyer"){
+                if (category == "Lawyer") {
                     console.log("Done");
                     category = config.lawyerColl;
-                }
-                else if(category == "Police"){
+                } else if (category == "Police") {
                     category = config.policeColl;
-                }
-                else if(category == "Judge"){
+                } else if (category == "Judge") {
                     category = config.judgeColl;
-                }
-                else{
+                } else {
                     category = "users";
                 }
                 MongoClient.connect(config.dbURI, (err, client) => {
@@ -136,7 +129,7 @@ module.exports = () => {
                     client.db(config.dbName).collection(category).insertOne(det)
                         .then((det) => {
                             console.log("Saved");
-                            return res.status(200).send({message : "Done"});
+                            return res.status(200).send({ message: "Done" });
                         }).catch(err => console.log(err));
                 });
 
@@ -298,7 +291,5 @@ module.exports = () => {
             res.status(404).sendFile(process.cwd() + '/views/404.htm');
         }
     }
-
-
     return h.route(routes);
 }
