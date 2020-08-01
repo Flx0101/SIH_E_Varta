@@ -65,7 +65,7 @@ section .login-container .user .formBx{
 	transition: 0.5s;
 }
 
-section .login-container .user .formBx form h2{
+section .login-container .user .formBx div h2{
 	font-size: 18px;
 	font-weight: 600;
 	text-transform: uppercase;
@@ -76,7 +76,7 @@ section .login-container .user .formBx form h2{
 	color: #555;
 }
 
-section .login-container .user .formBx form input{
+section .login-container .user .formBx div input{
 	position: relative;
 	width: 100%;
 	padding:10px;
@@ -91,7 +91,7 @@ section .login-container .user .formBx form input{
 	font-weight: 300;
 }
 
-section .login-container .user .formBx form input[type="submit"]{
+section .login-container .user .formBx div input[type="submit"]{
 	width: 50%;
 	margin-left: auto;
 	margin-right: auto;
@@ -104,7 +104,7 @@ section .login-container .user .formBx form input[type="submit"]{
 	transition: 0.5s;
 }
 
-section .login-container .user .formBx form .signup{
+section .login-container .user .formBx div .signup{
 	position: relative;
 	margin-top: 20px;
 	font-size: 12px;
@@ -114,7 +114,7 @@ section .login-container .user .formBx form .signup{
 	font-weight: 300;
 }
 
-section .login-container .user .formBx form .signup a{
+section .login-container .user .formBx div .signup a{
 	font-weight: 600;
 	text-decoration: none;
 	color:#677eff;
