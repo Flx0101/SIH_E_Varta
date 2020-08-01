@@ -11,7 +11,7 @@ window.addEventListener('load', () => {
             mainSecElem.classList.remove('col-md-9');
             mainSecElem.classList.add('col-md-12');
             chatElem.classList.remove('chat-opened');
-            
+
         } else {
             chatElem.attributes.removeNamedItem('hidden');
             mainSecElem.classList.remove('col-md-12');
@@ -38,12 +38,12 @@ window.addEventListener('load', () => {
             mainSecElem.classList.add('col-md-12');
             topEle.classList.remove('hide');
             chatElem.classList.remove('chat-opened');
-            
+
         } else {
             chatElem.attributes.removeNamedItem('hidden');
             mainSecElem.classList.remove('col-md-12');
             mainSecElem.classList.add('col-md-9');
-            chatElem.classList.add('chat-opened');    
+            chatElem.classList.add('chat-opened');
         }
 
     });
