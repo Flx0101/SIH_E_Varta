@@ -1,0 +1,181 @@
+
+
+/*host a meeting form*/
+.bg-radius{
+    color: black;
+    opacity: 0.9;
+    border: 0.1em solid lightgrey;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    -webkit-box-shadow: 2px 3px 21px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 3px 21px -5px rgba(0,0,0,0.75);
+    box-shadow: 2px 3px 21px -5px rgba(0,0,0,0.75);
+}
+
+#main-div {
+    transition: transform 0.5s ease;
+}
+
+/*Meeting description*/
+textarea{
+    resize: none;
+    background-color: transparent;
+}
+
+/*Dynamic Checkboxes*/
+.margin{
+    width: 10em;
+    margin: 0.5em 2em;
+}
+
+.margin-x{
+    margin: 0.5em 1em;
+}
+
+/*Label Heading*/
+.lbl-heading {
+    font-size: 2em;
+    font-weight: bolder;
+}
+
+/*List of Attendees*/
+#participants {
+    display: none;
+    color: black;
+    border: 1px solid lightgrey;
+    margin-top: 2em;
+}
+
+.participants {
+    transition: transform 0.8s ease-in-out;
+    overflow-y: scroll;
+    max-height: 200px;
+}
+
+.btn-meeting {
+    transition: transform 0.8s ease-in-out;
+}
+
+#btnHostMeeting{
+    margin-right: 2em;
+}
+
+.btn-meeting{
+    width: 25%;
+}
+
+.footerButtons{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-left: 45px;
+}
+
+@media screen and (max-width: 400px){
+    .participants{
+        width: 72%;
+        margin-left: 5em;
+    }
+
+    #main-div {
+        margin-left: 5em;
+        width: 72%
+    }
+
+    #btnInvite{
+        width: 100%;
+    }
+
+    #main-heading{
+        text-align: center;
+        margin-left: 2em;
+    }
+}
+
+@media screen and (max-width: 600px) and (min-width: 400px){
+    #main-div {
+        margin-left: 4em;
+        margin-right: auto;
+        width: 80%
+    }
+
+    .participants{
+        width: 75%;
+        margin-left: 5em;
+        margin-right: auto;
+    }
+
+    #btnInvite{
+        width: 100%;
+    }
+
+    #main-heading{
+        text-align: center;
+        margin-left: 2em;
+    }
+}
+@media screen and (max-width: 800px) and (min-width: 600px){
+    #main-div {
+        margin-left: 5em;
+        width: 72%
+    }
+
+    .participants {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%
+    }
+
+    #btnInvite{
+        width: 100%;
+    }
+
+    #main-heading{
+        text-align: center;
+        margin-left: 2em;
+    }
+}
+
+
+@media screen and (max-width: 1000px) and (min-width: 600px){
+    #main-div {
+        margin-left: auto;
+        margin-right: auto;
+        width: 72%
+    }
+
+    .participants {
+        margin-left: 5em;
+        margin-right: auto;
+        width: 60%
+    }
+
+    #btnInvite{
+        width: 100%;
+    }
+
+    #main-heading{
+        text-align: center;
+        margin-left: 2em;
+    }
+}
+
+@media screen and (min-width: 700px){
+    #main-div {
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%
+    }
+
+    #btnInvite{
+        width: 100%;
+    }
+
+    #main-heading{
+        text-align: center;
+        margin-left: 2em;
+    }
+}

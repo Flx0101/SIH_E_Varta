@@ -2,7 +2,6 @@
 
 const config = require('./config');
 
-
 // Create an IO Server instance
 let ioServer = app => {
     const server = require('http').Server(app);

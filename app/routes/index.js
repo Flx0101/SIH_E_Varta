@@ -34,14 +34,20 @@ routes.get('/cases' ,middleware.checkToken, (req , res , next) => {
             res.status(400).json({
                 "message" : "Fetching failed",
                 "description" : err
-            })
-        });
 
+            })
+            .catch((err) =>  {
+                console.log(err);
+                res.status(400).json({
+                    "message" : "Fetching failed",
+                    "description" : err
+                })
+            });
     });
-    
+    res.render('dashboard');
 });
 
-routes.post('/registerCase',(req , res , next) => {
+routes.post('/registerCase', (req, res, next) => {
     var det = new Case({
         caseNumber : req.body.caseNumber,
         description : req.body.desc,
@@ -52,52 +58,50 @@ routes.post('/registerCase',(req , res , next) => {
     det.date = new Date(det.date);
     console.log(det);
     console.log(typeof(det.date));
-    MongoClient.connect(config.dbURI , (err , client) => {
+    MongoClient.connect(config.dbURI, (err, client) => {
         client.db(config.dbName).collection(config.casesColl).insertOne(det)
-        .then((det) => {
-            console.log(det);
-            res.status(200).json({
-                "msg" : "Successfully registered",
+            .then((det) => {
+                console.log(det);
+                res.status(200).json({
+                    "msg" : "Successfully registered",
+                })
             })
-        })
-        .catch((err) => console.log(err));
+            .catch((err) => console.log(err));
     });
 
 });
 
-routes.post("/registerMeeting" ,middleware.checkToken ,(req , res , next) => {
+routes.post("/registerMeeting", middleware.checkToken, (req, res, next) => {
     var det = {
-        _id: mongoose.Types.ObjectId(),
-        caseID : req.body.caseID,
-        owner : req.decoded,
-        meetingID : req.body.meetingID,
-        meetingURL : req.body.meetingURL
-    }
-    //Saving the meetings based on CaseID
+            _id: mongoose.Types.ObjectId(),
+            caseID: req.body.caseID,
+            owner: req.decoded,
+            meetingID: req.body.meetingID,
+            meetingURL: req.body.meetingURL
+        }
+        //Saving the meetings based on CaseID
 
-    MongoClient.connect(config.dbURI , (err , client) => {
+    MongoClient.connect(config.dbURI, (err, client) => {
         client.db(config.dbName).collection(meetingColl).insertOne(det)
-        .then((det) => {
-            console.log(det._doc);
-            res.status(200).json("Meeting Registered");
-        })
-        .catch((err) => {
-            res.status(400).json({
-                "message" : "Error occured",
-                "Detail" : err
-            });
-        })
+            .then((det) => {
+                console.log(det._doc);
+                res.status(200).json("Meeting Registered");
+            })
+            .catch((err) => {
+                res.status(400).json({
+                    "message" : "Error occured",
+                    "Detail" : err
+                });
+            })
     });
 });
-
-
 
 module.exports = () => {
     let routes = {
         'get': {
             '/': (req, res, next) => {
                 res.render('login');
-            }, 
+            },
             '/video': (req, res, next) => {
                 console.log("reached to video page");
                 res.render('video');
@@ -120,17 +124,14 @@ module.exports = () => {
                     password: sha256(req.body.psw)
                 });
                 console.log("Updating");
-                if(category == "Lawyer"){
+                if (category == "Lawyer") {
                     console.log("Done");
                     category = config.lawyerColl;
-                }
-                else if(category == "Police"){
+                } else if (category == "Police") {
                     category = config.policeColl;
-                }
-                else if(category == "Judge"){
+                } else if (category == "Judge") {
                     category = config.judgeColl;
-                }
-                else{
+                } else {
                     category = "users";
                 }
                 MongoClient.connect(config.dbURI, (err, client) => {
@@ -138,7 +139,7 @@ module.exports = () => {
                     client.db(config.dbName).collection(category).insertOne(det)
                         .then((det) => {
                             console.log("Saved");
-                            return res.status(200).send({message : "Done"});
+                            return res.status(200).send({ message: "Done" });
                         }).catch(err => console.log(err));
                 });
 
@@ -158,7 +159,7 @@ module.exports = () => {
                                 let token = jwt.sign({ email: det.email },
                                     config.secret, { expiresIn: '24h' }
                                 );
-                                
+
                                 res.status(200).json({
                                     success: true,
                                     message: "Authenticated,GG",
@@ -176,8 +177,8 @@ module.exports = () => {
 
 
                         }).catch((err) => {
-                            console.log(err);
-                        });
+                        console.log(err);
+                    });
                 });
 
             },
@@ -214,8 +215,8 @@ module.exports = () => {
 
 
                         }).catch((err) => {
-                            console.log(err);
-                        });
+                        console.log(err);
+                    });
                 });
 
             },
@@ -252,8 +253,8 @@ module.exports = () => {
 
 
                         }).catch((err) => {
-                            console.log(err);
-                        });
+                        console.log(err);
+                    });
                 });
 
             },
@@ -290,8 +291,8 @@ module.exports = () => {
 
 
                         }).catch((err) => {
-                            console.log(err);
-                        });
+                        console.log(err);
+                    });
                 });
 
             }
@@ -300,7 +301,5 @@ module.exports = () => {
             res.status(404).sendFile(process.cwd() + '/views/404.htm');
         }
     }
-
-
     return h.route(routes);
 }
