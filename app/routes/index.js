@@ -15,11 +15,11 @@ const Case = require('./../models/case');
 const Meeting = require('./../models/meeting');
 
 
-routes.get('/dashboard' ,middleware.checkToken, (req , res , next) => {
+routes.get('/cases' ,middleware.checkToken, (req , res , next) => {
     console.log("helo");
     //decoded value : req.decoded;
     let email = req.decoded.email;
-
+    
     MongoClient.connect(config.dbURI , (err , client) => {
         console.log(email);
         client.db(config.dbName).collection(config.casesColl).find({
@@ -27,7 +27,7 @@ routes.get('/dashboard' ,middleware.checkToken, (req , res , next) => {
         }).toArray()
         .then((doc) => {
             console.log(doc);
-            res.json(doc);
+            res.status(200).json(doc);
         })
         .catch((err) =>  {
             console.log(err);
@@ -38,13 +38,16 @@ routes.get('/dashboard' ,middleware.checkToken, (req , res , next) => {
         });
 
     });
+    
 });
 
 routes.post('/registerCase',(req , res , next) => {
     var det = new Case({
+        caseNumber : req.body.caseNumber,
         description : req.body.desc,
         date : req.body.date,
-        members : req.body.members
+        members : req.body.members,
+        status : req.body.status
     });
     det.date = new Date(det.date);
     console.log(det);

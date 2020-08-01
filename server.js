@@ -8,7 +8,6 @@ var path = require('path');
 let favicon = require('serve-favicon');
 const cors = require('cors');
 
-
 const bodyParser = require('body-parser');
 app.use(favicon('./app/favicon.ico'));
 

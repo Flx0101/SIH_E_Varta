@@ -24,7 +24,7 @@ let memberCheck = (req , res , next) => {
                         })
                     }
                     else{
-                        res.status(400).json({
+                        res.status(401).json({
                             "message" : "Authorization Failed.Cannot join the meeting"
                         })
                     }
