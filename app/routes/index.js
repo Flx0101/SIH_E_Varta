@@ -15,45 +15,45 @@ const Case = require('./../models/case');
 const Meeting = require('./../models/meeting');
 
 
-routes.get('/cases' ,middleware.checkToken, (req , res , next) => {
+routes.get('/cases', middleware.checkToken, (req, res, next) => {
     console.log("helo");
     //decoded value : req.decoded;
     let email = req.decoded.email;
-    
-    MongoClient.connect(config.dbURI , (err , client) => {
+
+    MongoClient.connect(config.dbURI, (err, client) => {
         console.log(email);
         client.db(config.dbName).collection(config.casesColl).find({
-            "members" : email
-        }).toArray()
-        .then((doc) => {
-            console.log(doc);
-            res.status(200).json(doc);
-        })
-        .catch((err) =>  {
-            console.log(err);
-            res.status(400).json({
-                "message" : "Fetching failed",
-                "description" : err
-
+                "members": email
+            }).toArray()
+            .then((doc) => {
+                console.log(doc);
+                res.status(200).json(doc);
             })
-            .catch((err) =>  {
+            .catch((err) => {
                 console.log(err);
                 res.status(400).json({
-                    "message" : "Fetching failed",
-                    "description" : err
-                })
-            });
-    });
-    res.render('dashboard');
-});
+                        "message": "Fetching failed",
+                        "description": err
 
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        res.status(400).json({
+                            "message": "Fetching failed",
+                            "description": err
+                        })
+                    });
+            });
+        res.render('dashboard');
+    });
+});
 routes.post('/registerCase', (req, res, next) => {
     var det = new Case({
-        caseNumber : req.body.caseNumber,
-        description : req.body.desc,
-        date : req.body.date,
-        members : req.body.members,
-        status : req.body.status
+        caseNumber: req.body.caseNumber,
+        description: req.body.desc,
+        date: req.body.date,
+        members: req.body.members,
+        status: req.body.status
     });
     det.date = new Date(det.date);
     console.log(det);
@@ -63,7 +63,7 @@ routes.post('/registerCase', (req, res, next) => {
             .then((det) => {
                 console.log(det);
                 res.status(200).json({
-                    "msg" : "Successfully registered",
+                    "msg": "Successfully registered",
                 })
             })
             .catch((err) => console.log(err));
@@ -89,8 +89,8 @@ routes.post("/registerMeeting", middleware.checkToken, (req, res, next) => {
             })
             .catch((err) => {
                 res.status(400).json({
-                    "message" : "Error occured",
-                    "Detail" : err
+                    "message": "Error occured",
+                    "Detail": err
                 });
             })
     });
@@ -177,8 +177,8 @@ module.exports = () => {
 
 
                         }).catch((err) => {
-                        console.log(err);
-                    });
+                            console.log(err);
+                        });
                 });
 
             },
@@ -215,8 +215,8 @@ module.exports = () => {
 
 
                         }).catch((err) => {
-                        console.log(err);
-                    });
+                            console.log(err);
+                        });
                 });
 
             },
@@ -253,8 +253,8 @@ module.exports = () => {
 
 
                         }).catch((err) => {
-                        console.log(err);
-                    });
+                            console.log(err);
+                        });
                 });
 
             },
@@ -291,8 +291,8 @@ module.exports = () => {
 
 
                         }).catch((err) => {
-                        console.log(err);
-                    });
+                            console.log(err);
+                        });
                 });
 
             }

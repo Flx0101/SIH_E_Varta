@@ -1,0 +1,229 @@
+.main {
+    padding-top: 40px;
+}
+
+.local-video {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    width: 15vw;
+}
+
+.mirror-mode {
+    -ms-transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.sender-info {
+    font-size: smaller;
+    margin-top: 5px;
+    align-self: flex-end;
+}
+
+.btn-no-effect:focus {
+    box-shadow: none;
+}
+
+.very-small {
+    font-size: 6px !important;
+}
+
+#close-single-peer-btn {
+    position: fixed;
+    top: 0;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    border-radius: 0%;
+    z-index: 100;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.record-option {
+    height: 200px;
+    border-radius: 10%;
+    border: 1px solid #17a2b8;
+    cursor: pointer;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.custom-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.custom-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #17a2b8;
+    width: 80%;
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+@media only screen and (max-width:767px) {
+    .chat-col {
+        right: -100vw;
+        width: 100vw;
+        z-index: 99999;
+        transition: 0.3s;
+        top: 47px;
+    }
+    .chat-opened::-webkit-scrollbar {
+        display: none;
+    }
+    #chat-messages {
+        height: 60vh;
+    }
+    .chat-box {
+        bottom: 90px;
+        margin-bottom: 0px;
+    }
+    .card-sm {
+        max-width: 100%;
+        min-width: 50%;
+    }
+    .local-video {
+        width: 40vw;
+    }
+}
+
+@media (min-width:768px) {
+    .card {
+        width: 50%;
+        z-index: 1000;
+    }
+}
+
+.icon {
+    border: 1px solid #F9AA33;
+    background-color: #F9AA33;
+    color: rgb(51, 51, 51);
+    border-radius: 50%;
+    padding: 1px;
+    vertical-align: middle;
+    text-align: center;
+    display: inline-block;
+    margin: 5px;
+}
+
+.icon-top {
+    background-color: #F9AA33;
+    border: 1px solid #F9AA33;
+    color: rgb(51, 51, 51);
+    border-radius: 50%;
+    padding: 1px;
+    margin: 12px;
+}
+
+.bottom-controls {
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 1px 3px 1px rgba(60, 64, 67, 0.149);
+    -moz-box-align: center;
+    box-align: center;
+    align-items: center;
+    background-color: #344955;
+    color: white;
+    bottom: 0;
+    left: 0;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-bottom: 0;
+    opacity: .96;
+    position: fixed;
+    text-align: center;
+    /* transform: translateY(100px);
+transition: opacity 250ms cubic-bezier(0.4,0.0,1,1),transform 250ms cubic-bezier(0.4,0.0,1,1); */
+    white-space: nowrap;
+    width: 100vw;
+    z-index: 3;
+    padding-right: 24px;
+    padding-left: 24px;
+    height: 10vh;
+}
+
+.top-controls {
+    background-color: #344955;
+    align-items: center;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    position: fixed;
+    min-width: min-content;
+    max-width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-right: 24px;
+    padding-left: 24px;
+    right: 0;
+    top: 0;
+    border-bottom-left-radius: 32px;
+    z-index: 3;
+}
+
+.top-controls>* :hover {
+    cursor: hand;
+}
+
+.remote-video {
+    height: 100%;
+    width: 100%;
+}
+
+.videospace {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 1fr);
+    grid-template-rows: repeat(auto-fit, 1fr);
+    background-color: darkgray;
+    height: 100vh;
+    width: 100%;
+    /* min-height: 100%; */
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    overflow: hidden;
+    object-fit: scale-down;
+    grid-gap: 2px;
+    height: 90vh;
+}
+
+.videospace video {
+    background-color: darkgray;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    overflow: hidden;
+}

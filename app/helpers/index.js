@@ -1,7 +1,6 @@
 'use strict';
 const router = require('express').Router();
 const db = require('../db');
-const crypto = require('crypto');
 
 // Iterate through the routes object and mount the routes
 let _registerRoutes = (routes, method) => {
@@ -28,15 +27,8 @@ let route = routes => {
 }
 
 
-// A function that generates a unique roomID
-let randomHex = () => {
-    return crypto.randomBytes(24).toString('hex');
-}
-
-// Find a chatroom with a given ID
-console.log(route);
 module.exports = {
     router,
-    route,
-    randomHex
+    route
+
 }

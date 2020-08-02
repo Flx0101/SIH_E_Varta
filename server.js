@@ -5,11 +5,9 @@ const chatConf = require('./app');
 const port = process.env.PORT || 3000;
 const stream = require('./app/socket');
 var path = require('path');
-let favicon = require('serve-favicon');
 const cors = require('cors');
 
 const bodyParser = require('body-parser');
-app.use(favicon('./app/favicon.ico'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -30,27 +28,19 @@ app.use(bodyParser.json());
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
-app.use(chatConf.session);
 
-app.use(require('morgan')('combined', {
-    stream: {
-        write: message => {
-            chatConf.logger.log('info', message);
-        }
-    }
-}));
+
 app.use('/', chatConf.router);
 
 chatConf.ioServer(app).listen(port, () => {
     console.log('Server Running on Port: ', port);
 });
 
-app.options('/login', function (req, res) {
+app.options('/login', function(req, res) {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader('Access-Control-Allow-Methods', '*');
     res.setHeader("Access-Control-Allow-Headers", "*");
     res.end();
 });
 
-module.exports = {app};
-
+module.exports = { app };
