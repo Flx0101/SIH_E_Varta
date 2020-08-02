@@ -12,6 +12,7 @@
     <script src='/socket.io/socket.io.js'></script>
     <script type="module" src='/js/rtc.js'></script>
     <script type="module" src='/js/events.js'></script>
+    <script type="module" src="/js/helper.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/7.3.0/adapter.min.js" integrity="sha256-2qQheewaqnZlXJ3RJRghVUwD/3fD9HNqxh4C+zvgmF4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js'></script>
@@ -20,9 +21,9 @@
 </head>
 
 <body>
-    <div class="container-fluid room-comm" hidden>
+    <div class="room-comm" hidden>
 
-        <div class="row">
+        <div>
             <div style="display: -moz-stack;">
 
                 <div class="videospace" id="videos">
@@ -47,7 +48,22 @@
 
                 </div>
 
-                <div class="bottom-controls room-comm" hidden>
+                <!-- Chat Screen -->
+                <div class="chat-col" id='chat-pane'>
+
+                    <div style="color: black; text-align: right; padding: 16px;" onclick="closeChat()">
+                        <i class="fa fa-times fa-lg"></i>
+                    </div>
+                    <div id='chat-messages' style="flex: 1; overflow-y: scroll;">
+
+                    </div>
+
+                    <div>
+                        <input id='chat-input' class="form-control rounded-0 chat-box border-info" rows='3' placeholder="Type here..." />
+                    </div>
+                </div>
+
+                <div class="bottom-controls">
                     <div>
                         Meeting Details
                     </div>
@@ -80,19 +96,32 @@
             </div>
 
 
-            <div class="col-md-3 chat-col d-print-none mb-2 bg-info" id='chat-pane' hidden>
-                <div class="row">
-                    <div class="col-12 text-center h2 mb-3">CHAT</div>
-                </div>
 
-                <div id='chat-messages'></div>
-
-                <div class="row">
-                    <textarea id='chat-input' class="form-control rounded-0 chat-box border-info" rows='3' placeholder="Type here..."></textarea>
-                </div>
-            </div>
         </div>
     </div>
 </body>
+
+<script>
+    document.getElementById('toggle-chat-pane').addEventListener('click', () => {
+        console.log("CHAT PANE");
+        let videospace = document.getElementById('videos');
+        let bottom = document.getElementsByClassName('bottom-controls');
+        videospace.style.width = "65%";
+        bottom[0].style.width = "65%";
+        document.getElementById('chat-pane').style.display = 'flex';
+        let tpControls = document.getElementsByClassName('top-controls')[0];
+        tpControls.style.visible = false;
+    });
+
+    function closeChat() {
+        let videospace = document.getElementById('videos');
+        let bottom = document.getElementsByClassName('bottom-controls');
+        videospace.style.width = "100%";
+        bottom[0].style.width = "100%";
+        let tpControls = document.getElementsByClassName('top-controls')[0];
+        document.getElementById('chat-pane').style.display = 'none';
+        tpControls.style.visible = true;
+    }
+</script>
 
 </html>

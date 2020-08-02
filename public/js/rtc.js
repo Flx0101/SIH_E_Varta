@@ -5,6 +5,7 @@ window.addEventListener('load', () => {
     if (location.href != " " && (decodeURIComponent(location.href).split('=', 2)[1]).length) {
         console.log('location.href is not an empty string')
         room = decodeURIComponent(location.href).split('=', 2)[1]
+        const username = sessionStorage.getItem('username');
         let commElem = document.getElementsByClassName('room-comm');
         for (let i = 0; i < commElem.length; i++) {
             commElem[i].attributes.removeNamedItem('hidden');
@@ -48,7 +49,7 @@ window.addEventListener('load', () => {
 
                     helper.getUserResources().then(async(stream) => {
                         if (!document.getElementById('local').srcObject) {
-                            h.setLocalStream(stream);
+                            helper.setLocalStream(stream);
                         }
                         myStream = stream;
                         stream.getTracks().forEach((track) => {
@@ -67,7 +68,7 @@ window.addEventListener('load', () => {
 
 
             socket.on('chat', (data) => {
-                h.addChat(data, 'remote');
+                helper.addChat(data, 'remote');
             });
         });
 
@@ -327,39 +328,65 @@ window.addEventListener('load', () => {
         });
 
 
-        document.getElementById('record').addEventListener('click', (e) => {
+        // document.getElementById('record').addEventListener('click', (e) => {
 
-            if (!mediaRecorder || mediaRecorder.state == 'inactive') {
-                helper.toggleModal('recording-options-modal', true);
-            } else if (mediaRecorder.state == 'paused') {
-                mediaRecorder.resume();
-            } else if (mediaRecorder.state == 'recording') {
-                mediaRecorder.stop();
-            }
-        });
+        //     if (!mediaRecorder || mediaRecorder.state == 'inactive') {
+        //         helper.toggleModal('recording-options-modal', true);
+        //     } else if (mediaRecorder.state == 'paused') {
+        //         mediaRecorder.resume();
+        //     } else if (mediaRecorder.state == 'recording') {
+        //         mediaRecorder.stop();
+        //     }
+        // });
 
 
-        document.getElementById('record-screen').addEventListener('click', () => {
-            helper.toggleModal('recording-options-modal', false);
+        // document.getElementById('record-screen').addEventListener('click', () => {
+        //     helper.toggleModal('recording-options-modal', false);
 
-            if (screen && screen.getVideoTracks().length) {
-                startRecording(screen);
-            } else {
-                helper.shareScreen().then((screenStream) => {
-                    startRecording(screenStream);
-                }).catch(() => {});
-            }
-        });
+        //     if (screen && screen.getVideoTracks().length) {
+        //         startRecording(screen);
+        //     } else {
+        //         helper.shareScreen().then((screenStream) => {
+        //             startRecording(screenStream);
+        //         }).catch(() => {});
+        //     }
+        // });
 
-        document.getElementById('record-video').addEventListener('click', () => {
-            helper.toggleModal('recording-options-modal', false);
+        // document.getElementById('record-video').addEventListener('click', () => {
+        //     helper.toggleModal('recording-options-modal', false);
 
-            if (myStream && myStream.getTracks().length) {
-                startRecording(myStream);
-            } else {
-                helper.getUserResources().then((videoStream) => {
-                    startRecording(videoStream);
-                }).catch(() => {});
+        //     if (myStream && myStream.getTracks().length) {
+        //         startRecording(myStream);
+        //     } else {
+        //         helper.getUserResources().then((videoStream) => {
+        //             startRecording(videoStream);
+        //         }).catch(() => {});
+        //     }
+        // });
+
+        function sendMsg(msg) {
+            let data = {
+                room: room,
+                msg: msg,
+                sender: username
+            };
+
+            //emit chat message
+            socket.emit('chat', data);
+
+            //add localchat
+            helper.addChat(data, 'local');
+        }
+
+        document.getElementById('chat-input').addEventListener('keypress', (e) => {
+            if (e.which === 13 && (e.target.value.trim())) {
+                e.preventDefault();
+
+                sendMsg(e.target.value);
+
+                setTimeout(() => {
+                    e.target.value = '';
+                }, 50);
             }
         });
     }

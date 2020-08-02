@@ -4,6 +4,8 @@ window.addEventListener('load', () => {
     let roomName = "roomName";
     let yourName = "userName";
     console.log(roomName + " " + yourName);
+    sessionStorage.setItem('username', yourName);
+
     if (roomName && yourName) {
         let roomLink = `${ location.origin }/video?room=${ roomName.trim().replace( ' ', '_' ) }_${ Date.now() }`;
         console.log(roomLink);
@@ -29,7 +31,8 @@ window.addEventListener('load', () => {
         }
     });
 
-    document.getElementById('closeModal').addEventListener('click', () => {
-        helper.toggleModal('recording-options-modal', false);
-    });
+    // document.getElementById('closeModal').addEventListener('click', () => {
+    //     helper.toggleModal('recording-options-modal', false);
+    // });
+
 });
