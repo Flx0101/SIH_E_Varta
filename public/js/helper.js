@@ -181,6 +181,8 @@ export default {
         let rowDiv = document.createElement('div');
         rowDiv.className = `row ${ contentAlign } mb-2`;
 
+        // //video controls elements
+       
 
         colDiv.appendChild(infoDiv);
         rowDiv.appendChild(colDiv);

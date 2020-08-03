@@ -30,7 +30,7 @@
 
                 </div>
 
-                <div class="top-controls">
+                <div class="top-controls" id="top-navigation">
                     <div class="icon-top">
                         <button class="btn btn-sm text-white btn-no-effect">
                             <i class="fa fa-user-plus fa-2x" aria-hidden="true" onclick="addNewMember()"></i>
@@ -49,18 +49,39 @@
                 </div>
 
                 <!-- Chat Screen -->
-                <div class="chat-col" id='chat-pane'>
+                <div class="chat-col" style="background-color:#344955;" id='chat-pane'>
 
-                    <div style="color: black; text-align: right; padding: 16px;" onclick="closeChat()">
+                    <div style="color: white; text-align: right; padding: 10px;" onclick="closeChat()">
                         <i class="fa fa-times fa-lg"></i>
                     </div>
-                    <div id='chat-messages' style="flex: 1; overflow-y: scroll;">
+                    <ul class="nav nav-pills justify-content-center my-3" >
+                        <li class="nav-item">
+                          <a class="nav-link active" style="background-color:#F9AA33;" href="#"><i class="fa fa-comment-alt fa-2x"></i></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" style="color:white;" href="#"><i class="fa fa-users fa-2x"></i></a>
+                        </li>
+
+                      </ul>
+                   
+                    <div id='chat-messages'>
 
                     </div>
-
-                    <div>
+                    <div class="input-group my-3 ">
+                        <input id="chat-input" type="text" class="form-control" placeholder="Type Something here" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <span class="input-group-text" role="button"> 
+                                <i class="fa fa-paperclip"></i>
+                            </span>
+                            <button type="button" class="btn btn-warning"> 
+                                <i class="fa fa-paper-plane"></i>
+                            </button>
+                           
+                        </div>
+                    </div>
+                    <!-- <div>
                         <input id='chat-input' class="form-control rounded-0 chat-box border-info" rows='3' placeholder="Type here..." />
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="bottom-controls">
@@ -106,11 +127,11 @@
         console.log("CHAT PANE");
         let videospace = document.getElementById('videos');
         let bottom = document.getElementsByClassName('bottom-controls');
-        videospace.style.width = "65%";
-        bottom[0].style.width = "65%";
+        videospace.style.width = "75%";
+        bottom[0].style.width = "75%";
         document.getElementById('chat-pane').style.display = 'flex';
-        let tpControls = document.getElementsByClassName('top-controls')[0];
-        tpControls.style.visible = false;
+        document.getElementById('top-navigation').classList.add('hide'); 
+       
     });
 
     function closeChat() {
@@ -120,8 +141,10 @@
         bottom[0].style.width = "100%";
         let tpControls = document.getElementsByClassName('top-controls')[0];
         document.getElementById('chat-pane').style.display = 'none';
-        tpControls.style.visible = true;
+        document.getElementById('top-navigation').classList.remove('hide'); 
+   
     }
+   
 </script>
 
 </html>

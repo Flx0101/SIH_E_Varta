@@ -133,7 +133,8 @@ window.addEventListener('load', () => {
                     video.className = 'remote-video';
                     let usersCount = videospace.children.length;
                     let columns = Math.sqrt(usersCount);
-
+                  
+                    
                     if (usersCount != 0) {
                         if (usersCount == 1) {
                             videospace.style.gridTemplateColumns = "repeat( 2, 1fr)";
@@ -146,6 +147,8 @@ window.addEventListener('load', () => {
                             videospace.style.gridTemplateRows = "repeat(" + (Math.ceil(columns) + 1).toString() + ", 1fr)";
                         }
                     }
+                    
+
                     console.log(videospace);
                     videospace.appendChild(video);
                 }
